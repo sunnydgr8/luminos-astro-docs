@@ -204,3 +204,167 @@
 		grid-template-columns: repeat(3, 1fr);
 	}
 }
+
+/* -------------------------------------------------------------------------- */
+/* Article pages — Notion help article reading layout                          */
+/* -------------------------------------------------------------------------- */
+
+:root {
+	--sl-content-width: 42rem;
+	--sl-text-h1: 2.25rem;
+}
+
+/* Soften left sidebar; keep it for discoverability */
+.sidebar-content {
+	font-size: 0.9rem;
+}
+
+.sidebar-content a {
+	border-radius: 6px;
+}
+
+/* Main article column */
+.page:not(:has(.help-home)) .content-panel {
+	padding-block: 1.75rem 3rem;
+}
+
+.page:not(:has(.help-home)) .content-panel + .content-panel {
+	border-top: none;
+	padding-top: 0;
+}
+
+/* Breadcrumb / path feel */
+.page:not(:has(.help-home)) .sl-container > .content-panel:first-child .sl-markdown-content,
+.page:not(:has(.help-home)) starlight-page-title h1,
+.page:not(:has(.help-home)) h1.sl-title,
+.page:not(:has(.help-home)) .content-panel h1#_top {
+	letter-spacing: -0.03em;
+	font-weight: 700;
+	line-height: 1.2;
+}
+
+.page:not(:has(.help-home)) .sl-markdown-content {
+	font-size: 1.05rem;
+	line-height: 1.7;
+	color: var(--sl-color-text);
+}
+
+.page:not(:has(.help-home)) .sl-markdown-content h2 {
+	margin-top: 2.25rem;
+	padding-top: 0.35rem;
+	border-top: 1px solid var(--help-border);
+	font-size: 1.45rem;
+	letter-spacing: -0.02em;
+}
+
+.page:not(:has(.help-home)) .sl-markdown-content h3 {
+	font-size: 1.15rem;
+	letter-spacing: -0.015em;
+	margin-top: 1.75rem;
+}
+
+.page:not(:has(.help-home)) .sl-markdown-content a {
+	text-decoration: underline;
+	text-underline-offset: 0.15em;
+	color: inherit;
+}
+
+.page:not(:has(.help-home)) .sl-markdown-content a:hover {
+	color: var(--sl-color-accent);
+}
+
+/* Jump / related style for trailing arrows */
+.page:not(:has(.help-home)) .sl-markdown-content a[href$='/']:not([class]) {
+	text-underline-offset: 0.2em;
+}
+
+.page:not(:has(.help-home)) .sl-markdown-content a.jump-link {
+	display: inline-flex;
+	align-items: center;
+	margin: 0.75rem 0 1.25rem;
+	padding: 0.45rem 0.9rem;
+	border: 1px solid var(--help-border);
+	border-radius: 999px;
+	background: var(--sl-color-bg);
+	color: var(--sl-color-text) !important;
+	text-decoration: none !important;
+	font-size: 0.875rem;
+	font-weight: 500;
+}
+
+.page:not(:has(.help-home)) .sl-markdown-content a.jump-link:hover {
+	background: var(--help-card);
+	color: var(--sl-color-accent) !important;
+}
+
+/* Rounded media like Notion */
+.page:not(:has(.help-home)) .sl-markdown-content img,
+.page:not(:has(.help-home)) .sl-markdown-content video,
+.page:not(:has(.help-home)) .sl-markdown-content iframe {
+	border-radius: 12px;
+	border: 1px solid var(--help-border);
+}
+
+.page:not(:has(.help-home)) .sl-markdown-content figure {
+	margin-block: 1.5rem;
+}
+
+.page:not(:has(.help-home)) .sl-markdown-content figcaption,
+.page:not(:has(.help-home)) .sl-markdown-content > p > em:only-child {
+	color: var(--help-muted);
+	font-size: 0.9rem;
+}
+
+/* Tables — quieter */
+.page:not(:has(.help-home)) .sl-markdown-content table {
+	font-size: 0.95rem;
+	border-collapse: collapse;
+}
+
+.page:not(:has(.help-home)) .sl-markdown-content th,
+.page:not(:has(.help-home)) .sl-markdown-content td {
+	border-color: var(--help-border);
+	padding: 0.7rem 0.85rem;
+}
+
+.page:not(:has(.help-home)) .sl-markdown-content th {
+	background: var(--help-card);
+}
+
+/* Right TOC as Notion “Contents” */
+.right-sidebar {
+	border-inline-start: none;
+}
+
+.right-sidebar-panel {
+	padding-top: 1.5rem;
+}
+
+.right-sidebar h2,
+starlight-toc h2,
+.right-sidebar .sl-container > strong {
+	font-size: 0.8rem !important;
+	font-weight: 600;
+	letter-spacing: 0.02em;
+	text-transform: none;
+	color: var(--help-muted);
+}
+
+starlight-toc a,
+.right-sidebar a {
+	font-size: 0.875rem;
+	border-radius: 6px;
+}
+
+/* Footer meta quieter */
+.page:not(:has(.help-home)) footer .meta {
+	color: var(--help-muted);
+	font-size: 0.85rem;
+}
+
+/* Mobile: article spacing */
+@media (max-width: 72rem) {
+	.page:not(:has(.help-home)) .content-panel {
+		padding-inline: 1.25rem;
+	}
+}

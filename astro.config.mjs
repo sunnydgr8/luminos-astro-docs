@@ -21,6 +21,9 @@ export default defineConfig({
 				{ icon: 'discord', label: 'Community', href: 'https://community.lumintheme.com' },
 			],
 			customCss: ['./src/styles/custom.css'],
+			components: {
+				Pagination: './src/components/Pagination.astro',
+			},
 			sidebar: [
 				{
 					label: 'Getting started',
