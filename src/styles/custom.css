@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap');
+
+/* LuminTheme brand tokens from lumintheme.com */
+:root {
+	--sl-color-accent-low: #d6e6ff;
+	--sl-color-accent: #0066cc;
+	--sl-color-accent-high: #004c99;
+	--sl-font: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+}
+
+:root[data-theme='dark'] {
+	--sl-color-accent-low: #003366;
+	--sl-color-accent: #4d94ff;
+	--sl-color-accent-high: #99c2ff;
+	--sl-color-bg: #0f1113;
+}
