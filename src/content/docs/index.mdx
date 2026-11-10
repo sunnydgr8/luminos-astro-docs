@@ -1,36 +1,117 @@
 ---
-title: LuminOS documentation
-description: Tutorials and reference for the LuminOS Shopify theme by Lumintheme
+title: Help Center
+description: Help, support, and documentation for the LuminOS Shopify theme
 template: splash
 hero:
-  title: LuminOS Docs
-  tagline: Setup guides, feature tutorials, and section reference for the LuminOS Shopify theme.
-  actions:
-    - text: Get started
-      link: /introduction/
-      icon: right-arrow
-      variant: primary
-    - text: Visit LuminTheme
-      link: https://lumintheme.com
-      icon: external
-      variant: minimal
+  title: Hi, how can we help you?
+  tagline: Search guides for LuminOS setup, bundles, reviews, cart, and more.
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+<div class="help-home">
+  <button type="button" class="help-search" id="help-search-open" aria-label="Search help center">
+    <span class="help-search__icon" aria-hidden="true">⌕</span>
+    <span class="help-search__placeholder">Search for anything…</span>
+  </button>
 
-## Start here
+  <div class="help-chips">
+    <a href="/guides/mix-and-match-bundles/">Bundles</a>
+    <a href="/guides/meta-reviews/">Meta Reviews</a>
+    <a href="/guides/quantity-breaks/">Quantity breaks</a>
+    <a href="/guides/cart-drawer/">Cart drawer</a>
+  </div>
 
-<CardGrid>
-  <Card title="Install" icon="rocket">
-    [Install and publish LuminOS](/getting-started/install/) on your Shopify store.
-  </Card>
-  <Card title="Bundles" icon="seti:json">
-    Set up [mix and match bundles](/guides/mix-and-match-bundles/) and the Discount App.
-  </Card>
-  <Card title="Reviews" icon="approve-check">
-    Configure [Meta Reviews](/guides/meta-reviews/) with Shopify metaobjects.
-  </Card>
-  <Card title="Community" icon="discord">
-    Ask questions at [community.lumintheme.com](https://community.lumintheme.com).
-  </Card>
-</CardGrid>
+  <h2 class="help-section-title">Popular topics</h2>
+  <div class="help-topics">
+    <a class="help-topic" href="/getting-started/install/">
+      <strong>Getting started</strong>
+      <span>Install and publish LuminOS on your Shopify store.</span>
+    </a>
+    <a class="help-topic" href="/guides/mix-and-match-bundles/">
+      <strong>Mix &amp; match bundles</strong>
+      <span>Build pool-based bundles with tiered discounts.</span>
+    </a>
+    <a class="help-topic" href="/guides/meta-reviews/">
+      <strong>Meta Reviews</strong>
+      <span>Show reviews with Shopify metaobjects—no Kit app required.</span>
+    </a>
+    <a class="help-topic" href="/guides/lumin-discount-app/">
+      <strong>Lumin Discount App</strong>
+      <span>Apply checkout discounts for mix &amp; match tiers.</span>
+    </a>
+    <a class="help-topic" href="/guides/quantity-breaks/">
+      <strong>Quantity breaks</strong>
+      <span>Configure multi-unit offers and unlock products on PDPs.</span>
+    </a>
+    <a class="help-topic" href="/guides/cart-drawer/">
+      <strong>Cart drawer</strong>
+      <span>Free shipping bar, gift wrap, upsells, and bundle headers.</span>
+    </a>
+  </div>
+
+  <h2 class="help-section-title">Browse by area</h2>
+  <div class="help-topics help-topics--compact">
+    <a class="help-topic" href="/getting-started/theme-editor/">
+      <strong>Theme editor</strong>
+      <span>Sections, blocks, and templates.</span>
+    </a>
+    <a class="help-topic" href="/guides/mega-menu/">
+      <strong>Header &amp; mega menu</strong>
+      <span>Tabs, products, and promo cards.</span>
+    </a>
+    <a class="help-topic" href="/guides/frequently-bought-together/">
+      <strong>Frequently bought together</strong>
+      <span>Cross-sell sets on the product page.</span>
+    </a>
+    <a class="help-topic" href="/troubleshooting/common-issues/">
+      <strong>Troubleshooting</strong>
+      <span>Discounts, empty reviews, waitlist, and cart issues.</span>
+    </a>
+  </div>
+
+  <h2 class="help-section-title">What’s new</h2>
+  <div class="help-news">
+    <a href="/changelog/">
+      <strong>LuminOS 1.0.0 — lumin-lander-1</strong>
+      <span>Initial theme line and docs launch notes.</span>
+    </a>
+    <a href="/introduction/">
+      <strong>Docs overview</strong>
+      <span>How these guides are organized.</span>
+    </a>
+  </div>
+
+  <h2 class="help-section-title">Still have questions?</h2>
+  <div class="help-support">
+    <a class="help-support__card" href="https://community.lumintheme.com">
+      <strong>Join the community</strong>
+      <span>Ask setup questions and share feedback.</span>
+    </a>
+    <a class="help-support__card" href="mailto:support@lumintheme.com">
+      <strong>Email support</strong>
+      <span>Reach out at support@lumintheme.com</span>
+    </a>
+    <a class="help-support__card" href="https://lumintheme.com">
+      <strong>Visit LuminTheme</strong>
+      <span>Themes, updates, and product pages.</span>
+    </a>
+  </div>
+</div>
+
+<script>
+	document.getElementById('help-search-open')?.addEventListener('click', () => {
+		const candidates = [
+			'button[aria-label="Search"]',
+			'button[data-open-modal]',
+			'site-search button',
+			'header button[aria-label*="Search" i]',
+		];
+		for (const sel of candidates) {
+			const el = document.querySelector(sel);
+			if (el instanceof HTMLElement) {
+				el.click();
+				return;
+			}
+		}
+		window.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', metaKey: true, bubbles: true }));
+	});
+</script>

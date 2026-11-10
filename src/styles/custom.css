@@ -1,11 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap');
 
-/* LuminTheme brand tokens from lumintheme.com */
+/* LuminTheme + Notion-style help center */
 :root {
 	--sl-color-accent-low: #d6e6ff;
 	--sl-color-accent: #0066cc;
 	--sl-color-accent-high: #004c99;
 	--sl-font: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+	--help-card: #f7f7f5;
+	--help-card-hover: #efefec;
+	--help-border: #e3e3e0;
+	--help-muted: #5f5e5a;
 }
 
 :root[data-theme='dark'] {
@@ -13,4 +17,190 @@
 	--sl-color-accent: #4d94ff;
 	--sl-color-accent-high: #99c2ff;
 	--sl-color-bg: #0f1113;
+	--help-card: #1c1e21;
+	--help-card-hover: #26292d;
+	--help-border: #2e3238;
+	--help-muted: #a8adb4;
+}
+
+/* Splash hero — Notion-like centered headline */
+.page:has(.help-home) .hero {
+	padding-block: 3rem 1rem;
+}
+
+.page:has(.help-home) .hero > img,
+.page:has(.help-home) .hero .actions {
+	display: none;
+}
+
+.page:has(.help-home) .hero .copy {
+	align-items: center;
+	text-align: center;
+	max-width: 40rem;
+	margin-inline: auto;
+}
+
+.page:has(.help-home) .hero .tagline {
+	color: var(--help-muted);
+	font-size: 1.05rem;
+}
+
+.page:has(.help-home) .hero h1 {
+	font-size: clamp(2rem, 4.5vw, 2.75rem);
+	font-weight: 700;
+	letter-spacing: -0.03em;
+	line-height: 1.15;
+}
+
+.page:has(.help-home) .sl-markdown-content {
+	max-width: 52rem;
+	margin-inline: auto;
+}
+
+.help-home {
+	display: flex;
+	flex-direction: column;
+	gap: 1.25rem;
+	padding-bottom: 3rem;
+}
+
+.help-search {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	width: 100%;
+	max-width: 36rem;
+	margin-inline: auto;
+	padding: 0.95rem 1.25rem;
+	border: 1px solid var(--help-border);
+	border-radius: 999px;
+	background: var(--sl-color-bg);
+	color: var(--help-muted);
+	font: inherit;
+	font-size: 1rem;
+	cursor: pointer;
+	box-shadow: 0 1px 2px rgb(0 0 0 / 4%);
+	transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.help-search:hover,
+.help-search:focus-visible {
+	border-color: var(--sl-color-accent);
+	box-shadow: 0 0 0 3px color-mix(in srgb, var(--sl-color-accent) 18%, transparent);
+	outline: none;
+}
+
+.help-search__icon {
+	font-size: 1.1rem;
+	opacity: 0.55;
+}
+
+.help-chips {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 0.5rem;
+	margin-bottom: 1.5rem;
+}
+
+.help-chips a {
+	display: inline-flex;
+	align-items: center;
+	padding: 0.35rem 0.8rem;
+	border-radius: 999px;
+	background: var(--help-card);
+	color: var(--sl-color-text) !important;
+	text-decoration: none !important;
+	font-size: 0.875rem;
+	font-weight: 500;
+	border: 1px solid transparent;
+}
+
+.help-chips a:hover {
+	background: var(--help-card-hover);
+	border-color: var(--help-border);
+}
+
+.help-section-title {
+	margin: 1.75rem 0 0.85rem !important;
+	font-size: 1.25rem !important;
+	font-weight: 700 !important;
+	letter-spacing: -0.02em;
+	border: none !important;
+	padding: 0 !important;
+}
+
+.help-topics {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 0.75rem;
+}
+
+@media (min-width: 640px) {
+	.help-topics {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+
+.help-topic {
+	display: flex;
+	flex-direction: column;
+	gap: 0.35rem;
+	padding: 1.15rem 1.25rem;
+	border-radius: 12px;
+	background: var(--help-card);
+	text-decoration: none !important;
+	color: inherit !important;
+	transition: background 0.15s ease;
+}
+
+.help-topic:hover {
+	background: var(--help-card-hover);
+}
+
+.help-topic strong {
+	font-size: 1.05rem;
+	font-weight: 650;
+	letter-spacing: -0.01em;
+}
+
+.help-topic span {
+	color: var(--help-muted);
+	font-size: 0.925rem;
+	line-height: 1.45;
+}
+
+.help-news,
+.help-support {
+	display: grid;
+	gap: 0.75rem;
+}
+
+.help-news a,
+.help-support__card {
+	display: flex;
+	flex-direction: column;
+	gap: 0.3rem;
+	padding: 1.1rem 1.25rem;
+	border-radius: 12px;
+	border: 1px solid var(--help-border);
+	text-decoration: none !important;
+	color: inherit !important;
+}
+
+.help-news a:hover,
+.help-support__card:hover {
+	background: var(--help-card);
+}
+
+.help-news span,
+.help-support__card span {
+	color: var(--help-muted);
+	font-size: 0.925rem;
+}
+
+@media (min-width: 720px) {
+	.help-support {
+		grid-template-columns: repeat(3, 1fr);
+	}
 }
