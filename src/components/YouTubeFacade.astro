@@ -1,0 +1,130 @@
+---
+/**
+ * Notion-style YouTube facade: poster + play button until click, then iframe.
+ */
+interface Props {
+	id: string;
+	title?: string;
+	/** Optional custom poster. Defaults to YouTube maxres thumbnail. */
+	poster?: string;
+}
+
+const { id, title = 'Play video', poster } = Astro.props;
+const posterSrc = poster ?? `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`;
+const fallbackPoster = `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
+---
+
+<div class="yt-facade" data-youtube-id={id} data-youtube-title={title}>
+	<button type="button" class="yt-facade__button" aria-label={`Play: ${title}`}>
+		<img
+			class="yt-facade__poster"
+			src={posterSrc}
+			alt=""
+			loading="lazy"
+			decoding="async"
+			onerror={`this.onerror=null;this.src='${fallbackPoster}'`}
+		/>
+		<span class="yt-facade__play" aria-hidden="true">
+			<svg viewBox="0 0 24 24" width="28" height="28">
+				<path class="yt-facade__play-icon" d="M8 5.5v13l11-6.5-11-6.5z"></path>
+			</svg>
+		</span>
+	</button>
+</div>
+
+<script>
+	function activateFacade(root: Element) {
+		const id = root.getAttribute('data-youtube-id');
+		const title = root.getAttribute('data-youtube-title') || 'YouTube video';
+		if (!id) return;
+
+		const iframe = document.createElement('iframe');
+		iframe.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`;
+		iframe.title = title;
+		iframe.allow =
+			'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+		iframe.allowFullscreen = true;
+		iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+		iframe.setAttribute(
+			'style',
+			'position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:12px;'
+		);
+
+		root.replaceChildren(iframe);
+		root.classList.add('yt-facade--playing');
+	}
+
+	function bindFacades(scope: ParentNode = document) {
+		scope.querySelectorAll('.yt-facade:not([data-bound])').forEach((root) => {
+			root.setAttribute('data-bound', 'true');
+			root.querySelector('.yt-facade__button')?.addEventListener('click', () => activateFacade(root));
+		});
+	}
+
+	bindFacades();
+	document.addEventListener('astro:page-load', () => bindFacades());
+</script>
+
+<style>
+	.yt-facade {
+		position: relative;
+		width: 100%;
+		aspect-ratio: 16 / 9;
+		margin: 1.25rem 0 1.75rem;
+		border-radius: 12px;
+		overflow: hidden;
+		background: #111;
+		border: 1px solid var(--help-border, #e3e3e0);
+	}
+
+	.yt-facade__button {
+		position: absolute;
+		inset: 0;
+		display: grid;
+		place-items: center;
+		padding: 0;
+		border: 0;
+		cursor: pointer;
+		background: transparent;
+	}
+
+	.yt-facade__poster {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.yt-facade__play {
+		position: relative;
+		z-index: 1;
+		display: grid;
+		place-items: center;
+		width: 4.5rem;
+		height: 4.5rem;
+		border-radius: 999px;
+		background: rgb(15 17 19 / 72%);
+		backdrop-filter: blur(2px);
+		transition: transform 0.15s ease, background 0.15s ease;
+	}
+
+	.yt-facade__button:hover .yt-facade__play,
+	.yt-facade__button:focus-visible .yt-facade__play {
+		transform: scale(1.06);
+		background: rgb(0 102 204 / 92%);
+	}
+
+	.yt-facade__play svg {
+		display: block;
+		margin-left: 0.15rem;
+	}
+
+	.yt-facade__play-icon {
+		fill: #fff;
+	}
+
+	.yt-facade--playing {
+		background: #000;
+	}
+</style>
