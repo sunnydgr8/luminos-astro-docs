@@ -368,3 +368,113 @@ starlight-toc a,
 		padding-inline: 1.25rem;
 	}
 }
+
+/* -------------------------------------------------------------------------- */
+/* Callouts — Notion-style (soft fill, rounded, no left border)                */
+/* -------------------------------------------------------------------------- */
+
+.starlight-aside {
+	border-inline-start: none !important;
+	border-radius: 10px;
+	padding: 1.1rem 1.2rem !important;
+	color: var(--sl-color-text) !important;
+}
+
+.starlight-aside__title {
+	color: var(--sl-color-text) !important;
+	font-size: 0.95rem !important;
+	font-weight: 700 !important;
+	gap: 0.55rem !important;
+}
+
+.starlight-aside__icon {
+	color: inherit;
+}
+
+.starlight-aside__content {
+	color: var(--sl-color-text);
+	font-size: 0.975rem;
+	line-height: 1.55;
+}
+
+.starlight-aside__content a {
+	color: inherit !important;
+	text-decoration: underline;
+	text-underline-offset: 0.15em;
+}
+
+.starlight-aside__title + .starlight-aside__content {
+	margin-top: 0.4rem !important;
+}
+
+/* Tip — pale blue like Notion */
+.starlight-aside--tip {
+	--sl-color-asides-text-accent: #1b4b8a;
+	--sl-color-asides-border: transparent;
+	background-color: #eef5ff !important;
+}
+
+.starlight-aside--tip .starlight-aside__title {
+	color: #1b4b8a !important;
+}
+
+/* Note — warm beige / stone like Notion */
+.starlight-aside--note {
+	--sl-color-asides-text-accent: #37352f;
+	--sl-color-asides-border: transparent;
+	background-color: #f4f4f1 !important;
+}
+
+.starlight-aside--note .starlight-aside__title {
+	color: #37352f !important;
+}
+
+/* Caution — soft cream, no gold left bar */
+.starlight-aside--caution {
+	--sl-color-asides-text-accent: #6b4f12;
+	--sl-color-asides-border: transparent;
+	background-color: #fbf3db !important;
+}
+
+.starlight-aside--caution .starlight-aside__title {
+	color: #6b4f12 !important;
+}
+
+/* Danger — soft rose */
+.starlight-aside--danger {
+	--sl-color-asides-text-accent: #7a271a;
+	--sl-color-asides-border: transparent;
+	background-color: #fdeceb !important;
+}
+
+.starlight-aside--danger .starlight-aside__title {
+	color: #7a271a !important;
+}
+
+:root[data-theme='dark'] .starlight-aside--tip {
+	background-color: #152338 !important;
+}
+:root[data-theme='dark'] .starlight-aside--tip .starlight-aside__title {
+	color: #9ec1ff !important;
+}
+
+:root[data-theme='dark'] .starlight-aside--note {
+	background-color: #2a2a28 !important;
+}
+:root[data-theme='dark'] .starlight-aside--note .starlight-aside__title {
+	color: #e8e6e1 !important;
+}
+
+:root[data-theme='dark'] .starlight-aside--caution {
+	background-color: #3a3118 !important;
+}
+:root[data-theme='dark'] .starlight-aside--caution .starlight-aside__title {
+	color: #f0d78c !important;
+}
+
+:root[data-theme='dark'] .starlight-aside--danger {
+	background-color: #3a1d1a !important;
+}
+:root[data-theme='dark'] .starlight-aside--danger .starlight-aside__title {
+	color: #f5b5ad !important;
+}
