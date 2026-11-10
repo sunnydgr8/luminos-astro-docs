@@ -251,8 +251,8 @@
 
 .page:not(:has(.help-home)) .sl-markdown-content h2 {
 	margin-top: 2.25rem;
-	padding-top: 0.35rem;
-	border-top: 1px solid var(--help-border);
+	padding-top: 0;
+	border-top: none;
 	font-size: 1.45rem;
 	letter-spacing: -0.02em;
 }
