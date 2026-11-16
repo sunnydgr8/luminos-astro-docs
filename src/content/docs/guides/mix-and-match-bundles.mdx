@@ -1,44 +1,127 @@
 ---
 title: "Mix and match bundles"
-description: "Set up the LuminOS mix and match bundle builder"
+description: "Set up the LuminOS mix and match bundle builder with categories, tiers, and checkout discounts"
 ---
 
-Build a product pool with tiered quantity discounts using the **Lumin Bundle Builder** section. Cart lines use `_lumin_bundle_*` properties (flat cart). Checkout discounts require the [Lumin Discount App](/guides/lumin-discount-app).
+Build a product pool with tiered quantity discounts using the **Lumin Bundle Builder** section. Shoppers pick any mix of products, fill the sidebar slots, and add the bundle to cart. Cart lines use `_lumin_bundle_*` properties (flat cart). Checkout discounts require the [Lumin Discount App](/guides/lumin-discount-app).
 
-## Video
+<a class="jump-link" href="#quick-checklist">Jump to checklist</a>
 
-Replace `VIDEO_ID` when your Loom is ready:
+## What you’ll create
 
-```html
-<iframe
-  src="https://www.loom.com/embed/VIDEO_ID"
-  frameborder="0"
-  allowFullScreen
-  style="width: 100%; height: 400px; border-radius: 8px;"
-></iframe>
-```
+1. A page (or product template) with the **Lumin Bundle Builder** section.
+2. **Bundle tier** blocks for quantity thresholds and percent-off labels.
+3. Optional **Category** blocks to group products with filter tabs.
+4. The [Lumin Discount App](/guides/lumin-discount-app) so tier discounts apply at checkout.
 
-## Setup
+![Bundle builder overview with empty sidebar](/images/mix-and-match-bundles/01-bundle-overview.png)
 
-1. Create or open a page/product template that should host the builder.
-2. In the theme editor, **Add section → Lumin Bundle Builder** (or your store’s labeled mix & match section).
-3. Add products to the pool and configure tiers (quantity thresholds and percent off labels).
-4. Style desktop/mobile sidebars, accents, and slot image ratios in section settings.
-5. Install and configure the [Lumin Discount App](/guides/lumin-discount-app) so tier discounts apply at checkout.
-6. Preview cart: bundle lines should show the bundle header styling from theme cart settings.
+*Product grid on the left, sticky “Your bundle” sidebar on the right.*
 
-## Cart behavior
+## 1. Add the section
 
-- Lines are flat (no nested parent line); properties identify the bundle.
-- Theme cart drawer can show a **bundle header** with colors from Theme settings → Cart.
-- Without the Discount App, UI tiers still display but checkout may charge full price.
+1. In the theme editor, open a **page** or **product** template (LuminOS includes a **bundle** page template you can duplicate).
+2. **Add section → Lumin Bundle Builder**.
+3. Set the products heading and subheading (for example “Choose your products”).
+4. Optionally customize the **Show all** label (supports bold / italic / link).
+
+## 2. Configure bundle tiers
+
+Add **Bundle tier** blocks. Each tier needs:
+
+| Setting | Example |
+| --- | --- |
+| Quantity | `5` |
+| Discount % | `20` |
+| Top label | `[n] Items` |
+| Bottom label | `[%] off` |
+
+Use clear steps such as 5 / 7 / 12. The active tier drives how many empty slots appear in the sidebar.
+
+![Sidebar with tiers, progress, and filled slots](/images/mix-and-match-bundles/05-sidebar-filled.png)
+
+*Shoppers select a tier, fill slots, then add the bundle when the minimum is met.*
+
+## 3. Add products (pool or categories)
+
+### Simple pool
+
+Under section settings, choose **Source → Collection** or **Product list**, then pick the collection or products. Use **Max products** and **Hide sold-out** as needed.
+
+### Categories (recommended for large pools)
+
+Add **Category** blocks instead of (or in addition to) the simple pool. Category blocks replace the single collection / product list.
+
+For each category:
+
+1. Set a **Title** (inline rich text — bold, italic, or link).
+2. Choose a **Collection** and/or **Products**.
+3. Set **Max products** for that group.
+
+![Category filter tabs](/images/mix-and-match-bundles/03-category-tabs.png)
+
+*Tabs let shoppers jump between groups. “Show all” lists every category.*
+
+![Product cards with variants and Add to bundle](/images/mix-and-match-bundles/04-product-cards.png)
+
+*Each card can show image, title, price, variant picker, and Add to bundle.*
+
+## 4. Style the cards and layout
+
+In section settings under **Product cards**:
+
+- **Style**, **Image ratio**, and **Corner radius**
+- **Card size desktop** — Small / Medium / Large (auto-fit grid by card width)
+- **Card size mobile** — Small / Large
+- Typography for title and price fonts/sizes
+- Colors for section, sidebar, accents, and buttons
+
+Enable **Show variant picker** if products have options shoppers must choose before adding.
+
+## 5. Connect checkout discounts
+
+Without the Discount App, tiers still display in the UI, but checkout may charge full price.
+
+1. Install the [Lumin Discount App](/guides/lumin-discount-app).
+2. Enable discounts for LuminOS mix & match / `_lumin_bundle_*` line properties.
+3. Test a real checkout in a development store.
+
+Theme **Cart** settings can style the mix & match **bundle header** in the [cart drawer](/guides/cart-drawer).
+
+![Bundle with products selected](/images/mix-and-match-bundles/02-bundle-with-items.png)
+
+*Filled slots, progress toward the active tier, and Add bundle CTA.*
+
+## How shoppers use it
+
+1. Optionally filter by category tab.
+2. Pick a tier (for example 5 items / 20% off).
+3. Choose variants and click **Add to bundle** until slots are filled.
+4. Click **Add bundle** — lines are added as flat cart items with bundle properties.
+5. Discount is calculated in cart / at checkout when the Discount App is configured.
+
+![Filtered category view](/images/mix-and-match-bundles/06-category-filtered.png)
+
+*Selecting a tab (for example Bags) focuses that category’s products.*
+
+## Quick checklist
+
+<a id="quick-checklist"></a>
+
+- [ ] Lumin Bundle Builder section on the intended template
+- [ ] At least one **Bundle tier** with quantity + discount %
+- [ ] Products via pool **or** Category blocks
+- [ ] Card size / colors look correct on desktop and mobile
+- [ ] Lumin Discount App installed and enabled
+- [ ] Test add-to-cart → cart drawer header → checkout discount
 
 ## Tips
 
-- Keep tier quantities clear (for example 3 / 6 / 9).
-- Test with a real checkout in a development store before launch.
-- See section reference after running `npm run generate` under **Sections**.
+- Keep 2–4 tiers for clarity.
+- Prefer Category blocks when you have many products or want filter tabs.
+- Do not stack mix & match with complex quantity-break UIs on the same PDP without a clear primary CTA.
+- See the [Lumin Bundle Builder](/sections/lumin-bundle-builder) section reference for every setting ID.
 
 ## Still stuck?
 
-Post in [Setup help](https://community.lumintheme.com/c/setup-help) with a screenshot of tiers and whether the Discount App is installed.
+Post in [Setup help](https://community.lumintheme.com/c/setup-help) with a screenshot of your tiers and whether the Discount App is installed.
