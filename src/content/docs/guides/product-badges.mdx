@@ -3,11 +3,23 @@ title: "Product badges"
 description: "Set up sale, sold out, and custom product badges in LuminOS"
 ---
 
-Product badges appear on product cards (and can show sale savings or sold out). Custom badges support colors, auto text contrast, and optional icons.
+Product badges appear on product cards (sale savings, sold out, and custom labels). Custom badges support colors, auto text contrast, and optional icons.
+
+When finished, a product card can look like this:
+
+![Glow Eye Wand product card with vertical New, Popular, and Save badges](/images/product-badges/06-storefront-result.png)
+
+*Custom labels + sale savings on a product card (vertical badges enabled).*
+
+<a class="jump-link" href="#quick-checklist">Jump to checklist</a>
 
 ## Theme settings
 
 Open **Online Store → Themes → Customize → Theme settings → Badges**.
+
+![Theme settings Badges panel with custom labels and vertical badges highlighted](/images/product-badges/00-theme-settings-badges.png)
+
+*Turn on custom labels (and vertical badges if you want the ribbon look).*
 
 | Setting | What it does |
 | --- | --- |
@@ -29,15 +41,25 @@ These need **no metafields**:
 
 ## Custom badges (two methods)
 
-Use **one** method per store (or prefer metaobjects; parallel lists are the fallback).
+Use **one** method per store (prefer metaobjects; parallel lists are the fallback).
 
 ### Method 1 — Metaobjects (recommended)
 
 Best when you want a label, background color, optional text color, and optional icon per badge.
 
-#### 1. Create the metaobject definition
+#### 1. Open Metaobjects and add a definition
 
-**Settings → Custom data → Metaobjects → Add definition**
+In Shopify Admin go to **Settings → Custom data** (or **Metafields and metaobjects**). Under **Metaobject definitions**, click **Add definition**.
+
+![Shopify settings Custom data with Add definition highlighted](/images/product-badges/01-settings-add-definition.png)
+
+*Settings → Metafields and metaobjects → **Add definition**.*
+
+#### 2. Add the product badge fields
+
+Create a definition (for example name **Product badge**, type/handle `product_badge`) with these fields. **Keys must match exactly:**
+
+![Product badge metaobject fields with required label and background highlighted](/images/product-badges/02-metaobject-fields.png)
 
 | Field | Key | Type | Required |
 | --- | --- | --- | --- |
@@ -46,19 +68,23 @@ Best when you want a label, background color, optional text color, and optional 
 | Text color | `text_color` | Color | No |
 | Icon | `icon` | File / Image | No |
 
-Give the definition a clear name (for example **Product badge**). Note the type/handle you choose.
-
 :::tip
 Leave **Text color** empty to let LuminOS pick white or dark text automatically (dark text only on very light backgrounds).
 :::
 
-#### 2. Enable storefront access
+#### 3. Enable storefront access
 
-On the metaobject definition, turn on **Storefront** read access so the theme can display entries.
+On the metaobject definition, open **Metaobject options** and turn on **Storefronts API access** (Read).
 
-#### 3. Add a product metafield
+![Storefronts API access toggle highlighted on metaobject options](/images/product-badges/04-storefront-access.png)
+
+*Without storefront read access, badges will not appear on the storefront.*
+
+#### 4. Add a product metafield
 
 **Settings → Custom data → Products → Add definition**
+
+![Product metafield definition for custom.product_badges](/images/product-badges/03-product-metafield.png)
 
 | Setting | Value |
 | --- | --- |
@@ -66,9 +92,9 @@ On the metaobject definition, turn on **Storefront** read access so the theme ca
 | Namespace and key | `custom.product_badges` |
 | Type | **List of metaobjects** → your Product badge type |
 
-#### 4. Assign badges on a product
+#### 5. Assign badges on a product
 
-Open a product → **Product badges** metafield → add entries (for example New, Popular, Limited). Set background colors; optionally set text color or icon.
+Open a product → **Product badges** metafield → add entries (for example New, Popular). Set background colors; optionally set text color or icon.
 
 ### Method 2 — Parallel lists
 
@@ -81,23 +107,21 @@ Use when you only need text + background colors (no icons).
 | Badges | `custom.badges` | List of single line text |
 | Badge colors | `custom.badge_colors` | List of color |
 
-Optional:
-
-| Name | Namespace and key | Type |
-| --- | --- | --- |
-| Badge text colors | `custom.badge_text_colors` | List of color |
+Optional: `custom.badge_text_colors` (list of color).
 
 #### Fill them in the same order
 
-Example on one product:
+![Parallel lists custom.badges and custom.badge_colors matched by index](/images/product-badges/05-parallel-lists.png)
+
+*Index 1 pairs with index 1, and so on.*
+
+Example:
 
 | Index | `custom.badges` | `custom.badge_colors` |
 | --- | --- | --- |
 | 1 | New | `#e11d48` |
 | 2 | Popular | `#dcfce7` |
 | 3 | Limited | `#9f1239` |
-
-Badge 1 uses row 1 text + color, badge 2 uses row 2, and so on.
 
 Also supported: `theme.label` + `theme.label_colors` (+ optional `theme.label_text_colors`).
 
@@ -114,13 +138,13 @@ You can still set an explicit text color on the metaobject or via `custom.badge_
 
 Enable **Show badges vertically** in Theme settings → Badges. Badges stack as tall ribbons with rotated text. Works best with **Top left** or **Bottom left** position.
 
-## Checklist
+## Quick checklist
 
 1. Theme settings → Badges → enable the badge types you need.
 2. For custom labels: create metaobjects **or** parallel list metafields.
 3. Turn on storefront access for metaobjects.
 4. Fill values on products.
-5. Preview a collection grid and a product card.
+5. Preview a collection or search results grid.
 
 ## Still stuck?
 
