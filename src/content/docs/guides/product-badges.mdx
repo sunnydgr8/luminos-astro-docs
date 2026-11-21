@@ -1,0 +1,127 @@
+---
+title: "Product badges"
+description: "Set up sale, sold out, and custom product badges in LuminOS"
+---
+
+Product badges appear on product cards (and can show sale savings or sold out). Custom badges support colors, auto text contrast, and optional icons.
+
+## Theme settings
+
+Open **Online Store → Themes → Customize → Theme settings → Badges**.
+
+| Setting | What it does |
+| --- | --- |
+| Position on cards | Top left, top right, or bottom left |
+| Show sold out badge | Shows when the product is unavailable |
+| Show sale savings badge | Shows when compare-at price is higher than price |
+| Savings display | Percent (`Save 25%`), amount (`Save $10`), or “Sale” label |
+| Show custom labels | Turns on metafield / metaobject custom badges |
+| Show badges vertically | Rotates badge text like a side ribbon |
+| Font / font size / text case | Typography for badge text |
+| Sale / sold out colors | Under theme **Colors** settings for badge schemes |
+
+## Automatic badges
+
+These need **no metafields**:
+
+1. **Sale** — product (or variant) has a compare-at price above the selling price.
+2. **Sold out** — product is unavailable and “Show sold out badge” is enabled.
+
+## Custom badges (two methods)
+
+Use **one** method per store (or prefer metaobjects; parallel lists are the fallback).
+
+### Method 1 — Metaobjects (recommended)
+
+Best when you want a label, background color, optional text color, and optional icon per badge.
+
+#### 1. Create the metaobject definition
+
+**Settings → Custom data → Metaobjects → Add definition**
+
+| Field | Key | Type | Required |
+| --- | --- | --- | --- |
+| Label | `label` | Single line text | Yes |
+| Background | `background` | Color | Yes |
+| Text color | `text_color` | Color | No |
+| Icon | `icon` | File / Image | No |
+
+Give the definition a clear name (for example **Product badge**). Note the type/handle you choose.
+
+:::tip
+Leave **Text color** empty to let LuminOS pick white or dark text automatically (dark text only on very light backgrounds).
+:::
+
+#### 2. Enable storefront access
+
+On the metaobject definition, turn on **Storefront** read access so the theme can display entries.
+
+#### 3. Add a product metafield
+
+**Settings → Custom data → Products → Add definition**
+
+| Setting | Value |
+| --- | --- |
+| Name | Product badges |
+| Namespace and key | `custom.product_badges` |
+| Type | **List of metaobjects** → your Product badge type |
+
+#### 4. Assign badges on a product
+
+Open a product → **Product badges** metafield → add entries (for example New, Popular, Limited). Set background colors; optionally set text color or icon.
+
+### Method 2 — Parallel lists
+
+Use when you only need text + background colors (no icons).
+
+#### Create two list metafields on Products
+
+| Name | Namespace and key | Type |
+| --- | --- | --- |
+| Badges | `custom.badges` | List of single line text |
+| Badge colors | `custom.badge_colors` | List of color |
+
+Optional:
+
+| Name | Namespace and key | Type |
+| --- | --- | --- |
+| Badge text colors | `custom.badge_text_colors` | List of color |
+
+#### Fill them in the same order
+
+Example on one product:
+
+| Index | `custom.badges` | `custom.badge_colors` |
+| --- | --- | --- |
+| 1 | New | `#e11d48` |
+| 2 | Popular | `#dcfce7` |
+| 3 | Limited | `#9f1239` |
+
+Badge 1 uses row 1 text + color, badge 2 uses row 2, and so on.
+
+Also supported: `theme.label` + `theme.label_colors` (+ optional `theme.label_text_colors`).
+
+## Text contrast
+
+If text color is blank:
+
+- **Very light** backgrounds → dark text (`#111111`)
+- All other backgrounds (red, maroon, blue, etc.) → white text
+
+You can still set an explicit text color on the metaobject or via `custom.badge_text_colors` to override.
+
+## Vertical badges
+
+Enable **Show badges vertically** in Theme settings → Badges. Badges stack as tall ribbons with rotated text. Works best with **Top left** or **Bottom left** position.
+
+## Checklist
+
+1. Theme settings → Badges → enable the badge types you need.
+2. For custom labels: create metaobjects **or** parallel list metafields.
+3. Turn on storefront access for metaobjects.
+4. Fill values on products.
+5. Preview a collection grid and a product card.
+
+## Still stuck?
+
+Post in [Setup help](https://community.lumintheme.com/c/setup-help) with a screenshot of your metafield or metaobject definition.

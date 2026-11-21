@@ -46,6 +46,7 @@ export default defineConfig({
 						{ label: 'Mega menu', slug: 'guides/mega-menu' },
 						{ label: 'Cart drawer', slug: 'guides/cart-drawer' },
 						{ label: 'Sibling products', slug: 'guides/sibling-products' },
+						{ label: 'Product badges', slug: 'guides/product-badges' },
 					],
 				},
 				{
